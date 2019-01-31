@@ -1,5 +1,7 @@
 package ast;
 
+import parser.SyntaxError;
+
 import java.io.IOException;
 
 public enum Op {
@@ -97,6 +99,25 @@ public enum Op {
                 return OR;
             default:
                 throw  new IOException("Can't parse OP, text doesn't match any case");
+        }
+    }
+
+    public static String gen(Op op) {
+        switch (op) {
+            case MINUS : return "-";
+            case PLUS : return "+";
+            case TIMES : return "*";
+            case DIVIDE : return "/";
+            case EQUALS:  return "==";
+            case HIGH:  return ">";
+            case LESS : return "<";
+            case EQUAL_OR_LESS: return "<=";
+            case EQUAL_OR_HIGHER: return ">=";
+            case AND : return "&&";
+            case OR : return "||";
+            case NOT : return "!";
+            case NOTEQUAL: return "!=";
+            default : throw  new IllegalArgumentException("Can't find Symbol");
         }
     }
 }

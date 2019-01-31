@@ -41,6 +41,13 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarDef(CalcParser.VarDefContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code LiteralInteger}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteralInteger(CalcParser.LiteralIntegerContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ParentExpression}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
@@ -62,12 +69,12 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBinaryExpression(CalcParser.BinaryExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Literal}
+	 * Visit a parse tree produced by the {@code BooleanLiteral}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLiteral(CalcParser.LiteralContext ctx);
+	T visitBooleanLiteral(CalcParser.BooleanLiteralContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ConditionalExpression}
 	 * labeled alternative in {@link CalcParser#expression}.

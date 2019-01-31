@@ -10,8 +10,8 @@ import java.util.List;
 public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     @Override
-    public AST visitLiteral(CalcParser.LiteralContext ctx) {
-        return new Literal(Integer.parseInt(ctx.getText()));
+    public AST visitLiteralInteger(CalcParser.LiteralIntegerContext ctx) {
+        return new LiteralInteger(Integer.parseInt(ctx.getText()));
     }
 
     @Override
@@ -36,8 +36,6 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!(op.equals(Op.MINUS)) || !(op.equals(Op.NOT)))
-            throw new IllegalArgumentException("UnaryExpressionContext operator is nor MINUS or NOT ");
         return new UnaryExpression(op, (Expression) visit(ctx.expression()));
 
     }
@@ -99,7 +97,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     public AST visitParentExpression(CalcParser.ParentExpressionContext ctx) {
         CalcParser.ExpressionContext exp = ctx.expression();
 
-        if (exp instanceof CalcParser.LiteralContext) return this.visitLiteral((CalcParser.LiteralContext) exp);
+        if (exp instanceof CalcParser.LiteralIntegerContext) return this.visitLiteralInteger((CalcParser.LiteralIntegerContext) exp);
         else if (exp instanceof CalcParser.VariableContext) return this.visitVariable((CalcParser.VariableContext) exp);
         else if (exp instanceof CalcParser.UnaryExpressionContext)
             return this.visitUnaryExpression((CalcParser.UnaryExpressionContext) exp);
@@ -108,6 +106,18 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         else if (exp instanceof CalcParser.BinaryExpressionContext)
             return this.visitBinaryExpression((CalcParser.BinaryExpressionContext) exp);
         else throw new IllegalArgumentException();
+    }
+
+    @Override
+    public AST visitBooleanLiteral(CalcParser.BooleanLiteralContext ctx) {
+        switch (ctx.BOOLEAN().getText()){
+            case "true":
+                return new BooleanLiteral(true);
+            case "false":
+                return new BooleanLiteral(false);
+            default:
+                throw new UnsupportedOperationException("Not true nor false");
+        }
     }
 }
 

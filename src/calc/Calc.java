@@ -3,6 +3,7 @@ package calc;
 import ast.AST;
 import ast.Body;
 import ast.Expression;
+import eval.State;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -53,13 +54,21 @@ public class Calc {
         }
     }
 
+    private static String genMain(String code) {
+        return "#include <stdio.h>\n" +
+                "int main () { \n" +
+                "return printf(\"%d\\n\"," + code + ");\n" +
+                "}\n";
+    }
+
     public static int interpret(InputStream is) throws IOException, SyntaxError {
         AST ast = analyze(is);
         return ((Body)ast).eval(); // green track
     }
     public static void compile(InputStream is, String inputFile) throws IOException, SyntaxError {
         AST ast = analyze(is);
-        String code = ((Expression)ast).gen(); // TODO : update to generate main and possibly blue and red tracks
+        String code = ((Body)ast).gen(); // TODO : update to generate main and possibly blue and red tracks
+        code = Calc.genMain(code);
         if (inputFile != null)
             write(code, inputFile);
         else

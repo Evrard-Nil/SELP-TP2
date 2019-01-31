@@ -58,13 +58,13 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitVarDef(CalcParser.VarDefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Literal}
+	 * Enter a parse tree produced by the {@code LiteralInteger}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 */
 	void enterLiteral(CalcParser.LiteralContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Literal}
+	 * Exit a parse tree produced by the {@code LiteralInteger}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 */

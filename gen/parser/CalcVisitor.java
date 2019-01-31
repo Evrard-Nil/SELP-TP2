@@ -41,7 +41,7 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarDef(CalcParser.VarDefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Literal}
+	 * Visit a parse tree produced by the {@code LiteralInteger}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

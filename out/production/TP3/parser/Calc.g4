@@ -12,7 +12,8 @@ body     : varDef* expression
          ;
 varDef   : '(' '=' variableId expression ')'
          ;
-expression : LITERAL                                         #Literal
+expression : INTEGER                                         #LiteralInteger
+           | BOOLEAN                                         #BooleanLiteral
            | '(' expression ')'                              #ParentExpression
            | variableId                                      #Variable
            |  UNARY expression                       #UnaryExpression
@@ -46,9 +47,11 @@ AND: '&&';
 
 OR: '||';
 
+BOOLEAN: 'true' | 'false' ;
+
 IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
          ;
-LITERAL  : '0' | ('1'..'9')('0'..'9')*
+INTEGER  : '0' | ('1'..'9')('0'..'9')*
          ;
 WS       : [ \t\n\r]+ -> channel(HIDDEN)
          ;

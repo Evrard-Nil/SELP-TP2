@@ -1,14 +1,14 @@
 package ast;
 
-public class Literal extends Expression {
+public class LiteralInteger extends Expression {
     int val;
 
-    public Literal(int val){
+    public LiteralInteger(int val){
         this.val=val;
     }
 
     public String toString(){
-        return "Literal(" + val+")";
+        return "LiteralInteger(" + val+")";
     }
 
     @Override

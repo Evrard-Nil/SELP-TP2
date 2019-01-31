@@ -19,11 +19,6 @@ public class BinaryExpression extends Expression {
     }
 
     @Override
-    public String gen() {
-        return null;
-    }
-
-    @Override
     public int eval() throws IOException {
         switch (this.op){
             case MINUS:
@@ -53,5 +48,9 @@ public class BinaryExpression extends Expression {
             default:
                 throw new ArithmeticException();
         }
+    }
+    @Override
+    public String gen() {
+        return "(" + exp1.gen() + Op.gen(op) + exp2.gen() + ")";
     }
 }
